@@ -1,0 +1,105 @@
+/* 我们在这里设置index.html的样式和全局的样式 */
+/* 全局配置 */
+*{
+  padding: 0;
+  margin: 0;
+}
+
+html, body{
+  height: 100%;
+}
+
+/* 整体区域高度 */
+.container-parent{
+  height: 100%;
+}
+
+/* 左侧区域样式 */
+.container-left{
+  height: 100%;
+  width: 220px;
+  background-color: rgb(49, 66, 85);
+  float: left;
+  color: white;
+}
+
+/* 左侧logo样式 */
+.container-left .header-logo{
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  background-color: rgb(2, 41, 76);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 左侧头部span样式 */
+.container-left .header-logo span{
+  margin-left: 5px;
+}
+
+/* 左侧菜单栏样式 */
+.container-left nav{
+  height: calc(100% - 50px);
+  padding-top: 20px;
+}
+/* 左侧菜单栏选项的样式 */
+.container-left nav li{
+  line-height: 40px;
+  font-size: 16px;
+  padding-left: 20px;
+  cursor: pointer;
+}
+/* 菜单栏选项hover样式 */
+.container-left nav li:hover{
+  background-color: white;
+  color: rgb(49, 66, 85);
+}
+/* 菜单栏图标样式 */
+.container-left nav i{
+  font-size: 20px;
+}
+/* 菜单栏字体样式 */
+.container-left nav li span{
+  margin-left: 20px;
+}
+/* 右侧区域样式设置 */
+.container-right{
+  width: calc(100% - 220px);
+  height: 100%;
+  float: left;
+}
+/* 右侧头部区域样式 */
+.container-right .header-right{
+  background-color: white;
+  line-height: 49px;
+  padding: 0 10px 0 20px;
+  font-size: 16px;
+  border-bottom: 1px solid #e2e2e2;
+}
+/* 右侧标题样式 */
+.header-title{
+  color: rgb(95, 95, 95);
+  margin-left: 5px;
+}
+/* 右侧头像样式 */
+.header-user{
+  float: right;
+}
+
+/* 右边内容区域样式 */
+.container-content{
+  height: calc(100% - 50px);
+  background-color: rgb(235, 235, 235);
+  padding: 10px;
+}
+/* 右侧内容区域主界面样式 */
+.content-main{
+  height: 100%;
+  background-color: white;
+  padding: 10px;
+}
+/* 设置content-main里代码片段div的样式 */
+.content-main>div{
+  height: 100%;
+}

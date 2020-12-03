@@ -1,0 +1,291 @@
+<div class="home">
+    <div id="one"></div>
+    <div id="two"></div>
+    <div id="three"></div>
+    <div id="four"></div>
+</div>
+<script>
+  $(function(){
+     one()
+     four()
+     two()
+     three()
+     function three(){
+      var myChart = echarts.init(document.getElementById('three'));
+
+      option = {
+    title: {
+        text: '堆叠区域图'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            label: {
+                backgroundcolor: 'rgba(255,255,255,0.30)'
+            }
+        }
+    },
+    legend: {
+        data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: [
+        {
+            type: 'category',
+            boundaryGap: false,
+            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value'
+        }
+    ],
+    series: [
+        {
+            name: '邮件营销',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            data: [120, 132, 101, 134, 90, 230, 210]
+        },
+        {
+            name: '联盟广告',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            data: [220, 182, 191, 234, 290, 330, 310]
+        },
+        {
+            name: '视频广告',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            data: [150, 232, 201, 154, 190, 330, 410]
+        },
+        {
+            name: '直接访问',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            data: [320, 332, 301, 334, 390, 330, 320]
+        },
+        {
+            name: '搜索引擎',
+            type: 'line',
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top'
+                }
+            },
+            areaStyle: {},
+            data: [820, 932, 901, 934, 1290, 1330, 1320]
+        }
+    ]
+};
+myChart.setOption(option);
+
+     }
+     function two(){
+      var myChart = echarts.init(document.getElementById('two'));
+
+// 指定图表的配置项和数据
+var option = {
+    title: {
+        text: 'ECharts 入门示例'
+    },
+    tooltip: {},
+    legend: {
+        data:['销量']
+    },
+    xAxis: {
+        data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+    },
+    yAxis: {},
+    series: [{
+        name: '销量',
+        type: 'bar',
+        data: [5, 20, 36, 10, 10, 20]
+    }]
+};
+
+// 使用刚指定的配置项和数据显示图表。
+myChart.setOption(option);
+
+     }
+     function four(){
+      var chart = Highcharts.chart('four', {
+	chart: {
+		spacing : [40, 0 , 40, 0]
+	},
+	title: {
+		floating:true,
+		text: '圆心显示的标题'
+	},
+	tooltip: {
+		pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	},
+	plotOptions: {
+		pie: {
+			allowPointSelect: true,
+			cursor: 'pointer',
+			dataLabels: {
+				enabled: true,
+				format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+				style: {
+					color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+				}
+			},
+			point: {
+				events: {
+					mouseOver: function(e) {  // 鼠标滑过时动态更新标题
+						// 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
+						chart.setTitle({
+							text: e.target.name+ '\t'+ e.target.y + ' %'
+						});
+					}
+					//, 
+					// click: function(e) { // 同样的可以在点击事件里处理
+					//     chart.setTitle({
+					//         text: e.point.name+ '\t'+ e.point.y + ' %'
+					//     });
+					// }
+				}
+			},
+		}
+	},
+	series: [{
+		type: 'pie',
+		innerSize: '80%',
+		name: '市场份额',
+		data: [
+			{name:'Firefox',   y: 45.0, url : 'http://bbs.hcharts.cn'},
+			['IE',       26.8],
+			{
+				name: 'Chrome',
+				y: 12.8,
+				sliced: true,
+				selected: true,
+				url: 'http://www.hcharts.cn'
+			},
+			['Safari',    8.5],
+			['Opera',     6.2],
+			['其他',   0.7]
+		]
+	}]
+}, function(c) { // 图表初始化完毕后的会掉函数
+	// 环形图圆心
+	var centerY = c.series[0].center[1],
+		titleHeight = parseInt(c.title.styles.fontSize);
+	// 动态设置标题位置
+	c.setTitle({
+		y:centerY + titleHeight/2
+	});
+});
+     }
+	  
+      function one(){
+        var chart = Highcharts.chart('one', {
+	title: {
+		text: '2010 ~ 2016 年太阳能行业就业人员发展情况'
+	},
+	subtitle: {
+		text: '数据来源：thesolarfoundation.com'
+	},
+	yAxis: {
+		title: {
+			text: '就业人数'
+		}
+	},
+	legend: {
+		layout: 'vertical',
+		align: 'right',
+		verticalAlign: 'middle'
+	},
+	plotOptions: {
+		series: {
+			label: {
+				connectorAllowed: false
+			},
+			pointStart: 2010
+		}
+	},
+	series: [{
+		name: '安装，实施人员',
+		data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+	}, {
+		name: '工人',
+		data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+	}, {
+		name: '销售',
+		data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+	}, {
+		name: '项目开发',
+		data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+	}, {
+		name: '其他',
+		data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+	}],
+	responsive: {
+		rules: [{
+			condition: {
+				maxWidth: 500
+			},
+			chartOptions: {
+				legend: {
+					layout: 'horizontal',
+					align: 'center',
+					verticalAlign: 'bottom'
+				}
+			}
+		}]
+	}
+});
+      }
+  })
+</script>
+<style>
+  .home{
+    height: 480px;
+	  margin-top: 20px;
+  }
+  .home > div{
+    width: 50%;
+    height: 50%;
+    float: left;
+  }
+  #one{
+    background-color:  rgba(148,148,148,0.30);
+  }
+  #two{
+    background-color: rgba(255,255,255,0.30);
+	
+  }
+  #three{
+    background-color: rgba(148,148,148,0.30);
+	
+  }
+  #four{
+    background-color:  rgba(80,80,80,0.50);
+  }
+</style>
+
+
+
+
+
+
+

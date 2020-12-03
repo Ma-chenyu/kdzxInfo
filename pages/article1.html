@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<body>
+	
+
+<style>
+	html,body{
+		text-align: center;
+	}
+	.main{
+		height: 100%;
+	}
+</style>
+
+<div class="main">
+  
+  <div class="table">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">num</th>
+          <th scope="col">title</th>
+          <!-- <th scope="col">真实姓名</th> -->
+          <th scope="col">column</th>
+          <th scope="col">actor</th>
+          <th scope="col">time</th>
+          <th scope="col">readings</th>
+          <th scope="col">status</th>
+          <th scope="col">operate</th>
+        </tr>
+      </thead>
+      <tbody id="one">
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+		  
+      </ul>
+    </nav>
+  </div>
+  
+</div>
+<script>
+  $(function(){
+    //全局变量 
+    var pagesize=5
+
+    loadArticle(0)
+    function loadArticle(page){
+      // $('.pagination').empty()
+      // $('tbody').empty()
+
+      var obj={
+          page:page,
+          pageSize:pagesize
+      }
+      $.get(baseURL + '/manager/article/findArticle',obj,function(res){
+        $('.pagination').empty()
+        $('tbody').empty()
+        
+        res.data.list.forEach(function(item){
+          var category=item.category?item.category.name:''
+          var rows = $(`<tr>
+          <td scope="col">`+item.id+`</td>
+          <td scope="col">`+item.title+`</td>
+
+          <td scope="col">`+category+`</td>
+          <td scope="col">`+item.author+`</td>
+          <td scope="col">`+item.publishtime+`</td>
+          <td scope="col">`+item.readtimes+`</td>
+          <td scope="col">`+item.status+`</td>
+          <td scope="col">
+            <span>删除</span>
+            <span>修改</span>
+            </td>
+        </tr>`)
+        $('tbody').append(rows)
+        })
+        // 总数据量
+        var total = res.data.total
+        // 总页数
+        var count = Math.ceil(total/pagesize)
+        for(var i=1;i<=count;i++){
+            var row = $(`<li class="page-item"><a class="page-link" href="#">`+i+`</a></li>`)
+            $('.pagination').append(row)
+        }
+      })
+    }
+
+    // 点击分页  事件委托
+    $('.pagination').on({
+      click:function(){
+          // console.log($(this).text())
+          var page = $(this).text() -1
+          loadArticle(page)
+      }
+    },'.page-item')
+
+  })
+</script>
+	
+</body>
+</html>

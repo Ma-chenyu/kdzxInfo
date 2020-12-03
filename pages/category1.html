@@ -1,0 +1,99 @@
+<div>
+	<div class="search">
+		<select name="" id="one" class="form-control">
+			<option value="">Please select</option>
+		</select>
+		
+		<select name="" id="two" class="form-control">
+			
+		</select>
+	</div>
+</div>
+
+<!--
+<script>
+	$(function(){
+    loadCategory()
+    function loadCategory() {
+        $.get(baseURL+'/manager/category/findAllCategory',function(res){
+          // console.log(res.data)
+          // 一级栏目
+          var oneCategory = res.data.filter(function(item){
+            // 过滤出父栏目为空的栏目
+            return !item.parent
+          })
+          oneCategory.forEach(function(item){
+            var row = $('<option value="'+item.id+'">'+item.name+'</option>')
+            $('#one').append(row)；
+          })
+        })
+    }
+    // 根据一级栏目筛选二级栏目
+    function loadTwoCategory(oid){
+      $('#two').empty()
+        $.get(baseURL + '/manager/category/findCategoryByParentId',{id:oid},function(res){
+          // console.log(res.data)
+          res.data.forEach(function(item){
+            var row = $('<option value="'+item.id+'">'+item.name+'</option>')
+            $('#two').append(row)；
+          })
+        })
+    }
+
+    // 监听第一个下拉框
+    $('#one').change(function(){
+      // console.log($(this).val())
+      if($(this).val()){
+          $('#two').css('display','block')
+          loadTwoCategory($(this).val())
+      }else{
+        $('#two').css('display','none')；
+      }
+    })
+  })
+
+</script>
+-->
+
+
+<script>
+  $(function(){
+    loadCategory()
+    function loadCategory() {
+        $.get(baseURL+'/manager/category/findAllCategory',function(res){
+          // console.log(res.data)
+          // 一级栏目
+          var oneCategory = res.data.filter(function(item){
+            // 过滤出父栏目为空的栏目
+            return !item.parent
+          })
+          oneCategory.forEach(function(item){
+            var row = $('<option value="'+item.id+'">'+item.name+'</option>')
+            $('#one').append(row)
+          })
+        })
+    }
+    // 根据一级栏目筛选二级栏目
+    function loadTwoCategory(oid){
+      $('#two').empty()
+        $.get(baseURL + '/manager/category/findCategoryByParentId',{id:oid},function(res){
+          // console.log(res.data)
+          res.data.forEach(function(item){
+            var row = $('<option value="'+item.id+'">'+item.name+'</option>')
+            $('#two').append(row)
+          })
+        })
+    }
+
+    // 监听第一个下拉框
+    $('#one').change(function(){
+      // console.log($(this).val())
+      if($(this).val()){
+          $('#two').css('display','block')
+          loadTwoCategory($(this).val())
+      }else{
+        $('#two').css('display','none')
+      }
+    })
+  })
+</script>

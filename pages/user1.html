@@ -1,0 +1,381 @@
+<!doctype html>
+<html>
+	<style>
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
+		body,html{
+			height:100%;
+		}
+		.check_user{
+			list-style: none;
+			
+		}
+		.check_li{
+			display: inline;
+		}
+		.check_li:hove{
+			cursor: pointer;
+		}
+		.nav-link{
+			color:#fff;
+			background-color: rgba(0,0,0,0.2);
+		}
+		.ta{
+			background: rgba(0,0,0,0.01);
+		}
+		.nav{
+			width: 100%;
+		}
+		.addUser{
+			float: right;
+			height:42px;
+			width: 59px;
+			border:0px;
+			
+		}
+	</style>
+	
+	<script src="../homework3/pages2/ajax.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+	
+<body>
+<!--	用户管理-->
+	<div class="user">
+    <div class="user_top title" style="color:#fff">user&nbsp;&nbsp;anagement</div>
+    <div class="user_content">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+		
+<!--		管理员  -->
+        <li class="nav-item active" role="presentation">
+          <a class="nav-link" id="home-tab" data-toggle="tab" href="#admin"  aria-selected="true" style="">admin</a>
+        </li>
+		
+<!--		编辑-->
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#editor"  aria-selected="false" >editor</a>
+        </li>
+		  
+<!--		用户  -->
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#vip" aria-selected="false">user</a>
+        </li>
+		
+		<li class="nav-item">
+			<button type="button" class="btn btn-info addUser nav-link" >Add</button>  
+		</li>  
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade in active" id="admin">
+          
+            <div class="table">
+			
+			<!--表头	-->
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">num</th>
+                    <th scope="col">username</th>
+                    <th scope="col">nickname</th>
+                    <th scope="col">email</th>
+                    <th scope="col">status</th>
+                    <th scope="col">regtime</th>	
+                    <th scope="col">operate</th>
+                  </tr>
+                </thead>
+                <tbody id="one">
+
+                </tbody>
+              </table>
+            </div>
+        </div>
+		  
+	<!--编辑-->
+        <div class="tab-pane fade" id="editor" >
+          <div class="table">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  	<th scope="col">num</th>
+                    <th scope="col">username</th>
+                    <th scope="col">nickname</th>
+                    <th scope="col">email</th>
+                    <th scope="col">status</th>
+                    <th scope="col">regtime</th>	
+                    <th scope="col">operate</th>
+                </tr>
+              </thead>
+              <tbody id="two">
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+		  
+		<!--用户-->
+        <div class="tab-pane fade" id="vip" >
+          <div class="table">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">num</th>
+                    <th scope="col">username</th>
+                    <th scope="col">nickname</th>
+                    <th scope="col">email</th>
+                    <th scope="col">status</th>
+                    <th scope="col">regtime</th>	
+                    <th scope="col">operate</th>
+                </tr>
+              </thead>
+              <tbody id="three">
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 模态框开始 -->
+    <div class="modal" id="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- 表单开始 -->
+              <form>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label col-form-label-sm">username</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="username" class="form-control form-control-sm">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label col-form-label-sm">nickname</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="nickname" class="form-control form-control-sm">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label col-form-label-sm">password</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="password" class="form-control form-control-sm">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label col-form-label-sm">email</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="email" class="form-control form-control-sm">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label col-form-label-sm">role</label>
+                  <div class="col-sm-10">
+                    <select id="role" class="form-control">
+                      <option value="admin">admin</option>
+                      <option value="editor">editor</option>
+                      <option value="user">user</option>
+                    </select>
+                  </div>
+                </div>
+
+              </form>
+            <!--表单结束  -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">EXIT</button>
+            <button type="button" class="btn btn-primary">SAVE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 模态框结束 -->
+</div>
+	
+	<script>
+		
+		
+		
+		$(function(){
+		
+			
+			
+			//保存用户信息
+			$('button:contains("SAVE")').click(function(){
+				$('#modal').hide();
+					var username = $('input[name=username]').value();
+					var nickname = $('input[name=nickname]').value();
+					var password = $('input[name=password]').value();
+				   	var email = $('input[name=email]').value();
+				   	var role = $('#role').value();
+					var obj = {
+						username:username,
+						nickname:nickname,
+						password:password,
+						email:email,
+						role:role
+					}
+					$ajax({
+						url:baseURL + '/manager/user/reg',
+						post:'post',
+						success:function(res){
+							loadUser();
+						}
+					})
+				
+			})
+			
+			//模态框关闭
+			$('button:contains("EXIT")').click(function(){
+				$('#modal').hide();
+			})
+			
+			//新增用户
+			$('.addUser').click(function(){
+				$('#modal').show();
+				$('.modal-title').text('Add User');
+			})
+			
+			
+			//时间处理函数
+			function dateParse(dataString){
+			if(dataString){
+			  let date = new Date(dataString);
+			  let Y = date.getFullYear() + '-';
+			  let M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+			  let D = (date.getDate()< 10 ? '0'+date.getDate() : date.getDate())+' ';
+			  let h = (date.getHours()< 10 ? '0'+date.getHours() : date.getHours())+ ':';
+			  let m = (date.getMinutes()< 10 ? '0'+date.getMinutes() : date.getMinutes())+ ':';
+			  let s = (date.getSeconds()< 10 ? '0'+date.getSeconds() : date.getSeconds());
+			  return Y+M+D+h+m+s;  
+			}else{
+			  return '';
+			}
+	}
+			
+			//加载用户
+			function loadUser(){
+				
+			
+				
+				
+				//表格置空
+				$('tbody').empty();
+				$.ajax({
+					url:baseURL+'/manager/user/findAllUser',
+					method:'get',
+					success:function(res){
+						//console.log(res);
+						//res.data获取所有对象
+						//filter筛选对象
+						var admin = res.data.filter(function(item){
+							//filter返回一个数组
+							//role是用户属性，设置返回值为admin的
+							return item.role =='admin';
+						})
+						
+						var editor = res.data.filter(function(item){
+							return item.role =='editor';
+						})
+						
+						var user = res.data.filter(function(item){
+							return item.role =='user';
+						})
+						
+						
+						//遍历admin用户
+						admin.forEach(function(item){
+							var status = '';
+							var btn = '';
+							
+							if(item.enabled == true){
+								status = '正常'
+								btn = '禁用'
+							}else{
+								status = '禁用'
+								btn = '启用'
+							}
+							
+							var row = $(`<tr>
+							  <td scope="col">`+item.id+`</td>
+							  <td scope="col">`+item.username+`</td>
+							  <td scope="col">`+item.nickname+`</td>
+							  <td scope="col">`+item.email+`</td>
+							  <td scope="col">`+status+`</td>
+							  <td scope="col">`+dateParse(item.regtime)+`</td>
+							  <td scope="col">
+							<sapn class="del">删除</span>
+							<sapn class="edit">`+btn+`</span>
+						</td>
+					</tr>`)
+					$('#one').append(row);
+						});
+				
+						//设置启用禁用
+						editor.forEach(function(item){
+							var status = ''
+							var btn = ''
+							
+							if(item.enable == true){
+								status = '正常'
+								btn = '禁用'
+							}else{
+								status = '禁用'
+								btn = '启用'
+							}
+							var row = $(`<tr>
+							  <td scope="col">`+item.id+`</td>
+							  <td scope="col">`+item.username+`</td>
+							  <td scope="col">`+item.nickname+`</td>
+							  <td scope="col">`+item.email+`</td>
+							  <td scope="col">`+status+`</td>
+							  <td scope="col">`+dateParse(item.regtime)+`</td>
+							  <td scope="col">
+						<sapn class="del">删除</span>
+						<sapn class="edit">`+btn+`</span>
+					</td>
+                </tr>`)
+					$(`#two`).append(row);
+						})
+					}
+				})
+			}
+			loadUser();
+
+		});
+
+	</script>
+	<style>
+	  .user_top{
+		/* background-color: pink; */
+		border-bottom: 1px solid #ccc;
+		margin-bottom: 10px;
+	  }
+	  .del{
+		color: red;
+		cursor: pointer;
+	  }
+	  .edit{
+		color: green;
+		cursor: pointer;
+	  }
+	  .table{
+		max-height: 380px;
+		overflow: auto;
+	  }
+</style>
+</body>
+</html>
+
+
+
+
